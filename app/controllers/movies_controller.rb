@@ -1,17 +1,21 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
   def index
     @movies = Movie.all
   end
+
   def show
   end
+
   def new
-    @movie = Movie.new
+    @movie = current_user.movies.build
   end
   def edit
   end
+
   def create
-    @movie = Movie.new(movie_params)
+    @movie = current_user.movies.build(movie_params)
 
     respond_to do |format|
       if @movie.save
@@ -23,6 +27,7 @@ class MoviesController < ApplicationController
       end
     end
   end
+
   def update
     respond_to do |format|
       if @movie.update(movie_params)
@@ -34,6 +39,7 @@ class MoviesController < ApplicationController
       end
     end
   end
+
   def destroy
     @movie.destroy
     respond_to do |format|
