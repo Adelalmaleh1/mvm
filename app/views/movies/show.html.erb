@@ -24,7 +24,7 @@
               </tr>
               <tr>
                 <td><strong>Category:</strong></td>
-                <td><%= @movie.category.name %></td>
+                <td><%= @movie.category.name if @movie.category%></td>
               </tr>
             </tbody>
           </table>
