@@ -10,13 +10,16 @@ class MoviesController < ApplicationController
 
   def new
     @movie = current_user.movies.build
+    @movie = Movie.new 
+    @categories = Category.all
   end
   def edit
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def create
     @movie = current_user.movies.build(movie_params)
-
+    @movie.category_id = params[:category_id]
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
@@ -29,6 +32,7 @@ class MoviesController < ApplicationController
   end
 
   def update
+    @movie.category_id = params[:category_id]
     respond_to do |format|
       if @movie.update(movie_params)
         format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
