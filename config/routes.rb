@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   get 'welcome/contact'
 
-  resources :movies
-  
+  resources :movies do
+  	member do
+  		put "like" => "movies#upvote"
+  		put "dislike" => "movies#downvote"
+  	end
+  end
 end
