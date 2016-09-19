@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
   def index
-    @movies = Movie.all
+    @movies = Movie.all.order(:cached_votes_score => :desc)
   end
 
   def show
@@ -52,7 +52,7 @@ class MoviesController < ApplicationController
     end
   end
   def upvote
-    @movie.upvote_from current_user
+    @movie.upvote_from current_user, :vote_weight => 3
     redirect_to root_path
   end
 

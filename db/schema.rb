@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916071437) do
+ActiveRecord::Schema.define(version: 20160916082226) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -20,20 +20,35 @@ ActiveRecord::Schema.define(version: 20160916071437) do
   end
 
   create_table "movies", force: :cascade do |t|
-    t.string   "title",              limit: 255
-    t.text     "description",        limit: 65535
-    t.string   "director",           limit: 255
-    t.string   "rating",             limit: 255
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.integer  "user_id",            limit: 4
-    t.string   "image_file_name",    limit: 255
-    t.string   "image_content_type", limit: 255
-    t.integer  "image_file_size",    limit: 4
+    t.string   "title",                   limit: 255
+    t.text     "description",             limit: 65535
+    t.string   "director",                limit: 255
+    t.string   "rating",                  limit: 255
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.integer  "user_id",                 limit: 4
+    t.string   "image_file_name",         limit: 255
+    t.string   "image_content_type",      limit: 255
+    t.integer  "image_file_size",         limit: 4
     t.datetime "image_updated_at"
-    t.string   "category_id",        limit: 255
-    t.string   "—force",             limit: 255
+    t.string   "category_id",             limit: 255
+    t.string   "—force",                  limit: 255
+    t.integer  "cached_votes_total",      limit: 4,     default: 0
+    t.integer  "cached_votes_score",      limit: 4,     default: 0
+    t.integer  "cached_votes_up",         limit: 4,     default: 0
+    t.integer  "cached_votes_down",       limit: 4,     default: 0
+    t.integer  "cached_weighted_score",   limit: 4,     default: 0
+    t.integer  "cached_weighted_total",   limit: 4,     default: 0
+    t.float    "cached_weighted_average", limit: 24,    default: 0.0
   end
+
+  add_index "movies", ["cached_votes_down"], name: "index_movies_on_cached_votes_down", using: :btree
+  add_index "movies", ["cached_votes_score"], name: "index_movies_on_cached_votes_score", using: :btree
+  add_index "movies", ["cached_votes_total"], name: "index_movies_on_cached_votes_total", using: :btree
+  add_index "movies", ["cached_votes_up"], name: "index_movies_on_cached_votes_up", using: :btree
+  add_index "movies", ["cached_weighted_average"], name: "index_movies_on_cached_weighted_average", using: :btree
+  add_index "movies", ["cached_weighted_score"], name: "index_movies_on_cached_weighted_score", using: :btree
+  add_index "movies", ["cached_weighted_total"], name: "index_movies_on_cached_weighted_total", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false

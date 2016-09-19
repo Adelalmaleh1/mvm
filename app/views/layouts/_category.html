@@ -1,24 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Case</title>
-  <meta charset="utf-8">
+<%if user_signed_in? %>
 
-</head>
-<body>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <title>Bootstrap Case</title>
+    <meta charset="utf-8">
 
-<div class="container">
-  <h3>category</h3>
-  <ul class="nav nav-tabs">
-    <li class= "active" ><%= link_to "home", root_path %></li>
-    <li><% Category.all.each do |category|%>
-    <li><%= link_to "#{category.name}", category_path(category) %></li>
-        <%end %>
-    </li>
-  </ul>
-  <br>
+  </head>
+  <body>
 
-</div>
+  <div class="container">
+    <h3>Genre</h3>
+    <ul class="nav nav-tabs">
+      <li class= "active" ><%= link_to "home", root_path %></li>
+      <li><% Category.all.each do |category|%>
+      <li><%= link_to "#{category.name}", category_path(category) %></li>
+          <%end %>
+      </li>
+    </ul>
+    <br>
 
-</body>
-</html>
+  </div>
+
+  </body>
+  </html>
+<%end%>

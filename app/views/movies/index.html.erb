@@ -1,3 +1,4 @@
+
 <%= render 'layouts/category' %>
 <% if !user_signed_in?%>
   <div class="jumbotron">
@@ -16,20 +17,8 @@
       <div class="col-sm-6 col-md-3">
         <div class="thumbnail">
           <%= link_to (image_tag movie.image.url(:medium), class: 'image'), movie %>
-
-            <%= link_to like_movie_path(movie), class: "like", method: :put do %>
-            <button type= "button" class = "btn btn-info" aria-label= "Left Align">
-              <span class= "glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden= "true"></span>
-              <span class= "badge"><%= movie.get_upvotes.size%></span>
-            </button>
-           <%end%>
-
-          <%= link_to dislike_movie_path(movie), class: "like", method: :put do %>
-          <button type= "button" class = "btn btn-info" aria-label= "Left Align">
-            <span class= "glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden= "true"></span>
-            <span class= "badge"><%= movie.get_downvotes.size%></span>
-          </button>
-          <%end%>
+          <%= render 'layouts/vote', movie: movie%>
+          
         </div>
       </div>
 
