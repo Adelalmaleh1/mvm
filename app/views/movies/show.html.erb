@@ -22,26 +22,50 @@
                 <td><strong>Rating:</strong></td>
                 <td><%= @movie.rating %></td>
               </tr>
-              <tr>
-                <td><strong>Category:</strong></td>
-                <td><%= @movie.category.name if @movie.category%></td>
-              </tr>
             </tbody>
           </table>
+          <%= link_to "Write a Review", new_movie_review_path(@movie) %>
         </div>
       </div>
       <div class="col-md-7 col-md-offset-1">
         <h1 class="review_title"><%= @movie.title %></h1>
         <p><%= @movie.description %></p>
+
+        <%if @reviews.blank?%>
+          <h3>No reviews yet, would you like to add the first!</h3>
+          <%= link_to "Write Review", new_movie_review_path(@movie), class: "btn btn-info" %>
+        <% else %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="table-responsive">
+                  <table class = "table">
+                    <tbody>
+                      <% @reviews.each do |review| %>
+                      <tr>
+                        <td><strong>Rating:</strong></td>
+                        <td><%= review.rating  %></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Comment:</strong></td>
+                        <td><%= review.comment  %></td>
+                      </tr>                        
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
-<% if user_signed_in? %>
-  <% if @movie.user_id == current_user.id %>
-    <%= link_to 'Edit', edit_movie_path(@movie) %> |
-    <%= link_to 'Back', movies_path %>
-  <%end%>
-<%end%>
 
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>
 

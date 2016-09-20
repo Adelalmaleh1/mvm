@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :reviews
   resources :categories
   devise_for :users
   root 'movies#index'
@@ -9,6 +8,7 @@ Rails.application.routes.draw do
   get 'welcome/contact'
 
   resources :movies do
+    resources :reviews, except: [:index, :show]
   	member do
   		put "like" => "movies#upvote"
   		put "dislike" => "movies#downvote"
