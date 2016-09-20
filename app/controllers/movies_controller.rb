@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   def index
     @movies = Movie.all.order(:cached_votes_score => :desc)
+    @movies = Movie.search(params[:search])
   end
 
   def show
@@ -11,7 +12,7 @@ class MoviesController < ApplicationController
   def new
     @movie = current_user.movies.build
     @movie = Movie.new 
-    @categories = Category.all
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
   def edit
     @categories = Category.all.map{|c| [ c.name, c.id ] }
@@ -52,7 +53,7 @@ class MoviesController < ApplicationController
     end
   end
   def upvote
-    @movie.upvote_from current_user, :vote_weight => 3
+    @movie.upvote_from current_user
     redirect_to root_path
   end
 
