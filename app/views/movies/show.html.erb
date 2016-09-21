@@ -20,8 +20,9 @@
               </tr>
               <tr>
                 <td><strong>Rating:</strong></td>
-                <td><%= @movie.rating %></td>
+                <td class="star-rating" data-score= <%= @movie.rating %> ></td>
               </tr>
+              <tr>
             </tbody>
           </table>
           <%= link_to "Write a Review", new_movie_review_path(@movie) %>
@@ -44,8 +45,7 @@
                     <tbody>
                       <% @reviews.each do |review| %>
                       <tr>
-                        <td><strong>Rating:</strong></td>
-                        <td><%= review.rating  %></td>
+                        <td class="star-rating" data-score= <%= review.rating %> ></td>
                       </tr>
                       <tr>
                         <td><strong>Comment:</strong></td>
@@ -73,3 +73,14 @@
     <%end%>
   <%end%>
 </ul>
+
+
+<script>
+    $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+</script>
