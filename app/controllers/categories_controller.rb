@@ -12,8 +12,6 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @category_movies = @category.movies
-    @category = @movie.category
-
   end
 
   # GET /categories/new

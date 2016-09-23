@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'welcome/about'
 
   get 'welcome/contact'
+  get 'search', to: 'search'
 
   resources :movies do
     resources :reviews, except: [:index, :show]

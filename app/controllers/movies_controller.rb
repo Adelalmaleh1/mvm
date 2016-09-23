@@ -1,16 +1,12 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
+
   def index
-    if params[:search]
-      @movies = Movie.search[params]
-    else
       @movies = Movie.all.order(:cached_votes_score => :desc)
-    end
       @movies = @movies.paginate(:page => 1, :per_page => 8)
+
   end
-
-
 
   def show
     @reviews = Review.where(movie_id: @movie.id).order("created_at DESC")
@@ -21,6 +17,7 @@ class MoviesController < ApplicationController
     @movie = Movie.new 
     @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
+
   def edit
     @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
@@ -59,6 +56,7 @@ class MoviesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def upvote
     @movie.upvote_from current_user
     redirect_to root_path
@@ -70,10 +68,11 @@ class MoviesController < ApplicationController
   end
 
   private
-    def set_movie
-      @movie = Movie.find(params[:id])
-    end
-    def movie_params
-      params.require(:movie).permit(:title, :description, :director, :rating, :image)
-    end
+  def set_movie
+    @movie = Movie.find(params[:id])
+  end
+
+  def movie_params
+    params.require(:movie).permit(:title, :description, :director, :rating, :image)
+  end
 end

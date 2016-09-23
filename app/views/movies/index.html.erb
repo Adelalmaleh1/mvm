@@ -23,5 +23,7 @@
     <% end %>
   </div>
 <% end %>
-  <div align = "center"><%= will_paginate @movies %></div>
-<p><%= link_to 'new movie', new_movie_path %></p>
+    <% if user_signed_in? %>
+      <div align = "center"><%= will_paginate @movies %></div>
+      <p><%= link_to 'new movie', new_movie_path %></p>
+    <%end%>
