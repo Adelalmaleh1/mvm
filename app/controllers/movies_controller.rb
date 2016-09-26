@@ -3,8 +3,8 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-      @movies = Movie.all.order(:cached_votes_score => :desc)
-      @movies = @movies.paginate(:page => 1, :per_page => 8)
+      @movies = Movie.order(:cached_votes_score => :desc)
+      @movies = @movies.paginate(:page => 1, :per_page => 10)
 
   end
 

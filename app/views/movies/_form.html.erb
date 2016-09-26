@@ -28,7 +28,8 @@
     <div id="star-rating"></div>
   </div>
   <div class= "field">
-    <%= select_tag(:category_id, options_for_select(@categories, selected: :category_id), :prompt => "Select one!") %>
+    <%= select_tag(:category_id, options_for_select(@categories, selected: :category_id), :prompt => "category!") %>
+
   </div>
   <div class="field">
     <%= f.label :image %></br>
