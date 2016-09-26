@@ -28,8 +28,6 @@ gem 'devise'
 gem "paperclip", "~> 5.0.0"
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'will_paginate', '~> 3.1'
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
 
 
 group :development, :test do
