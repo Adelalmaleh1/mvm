@@ -2,10 +2,17 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
 
+  def search
+    if params[:search].present?
+      @movies= Movie.search(params[:search])
+    else
+      @movies = Movie.all
+    end
+  end
+
   def index
       @movies = Movie.order(:cached_votes_score => :desc)
       @movies = @movies.paginate(:page => 1, :per_page => 10)
-
   end
 
   def show
@@ -66,6 +73,8 @@ class MoviesController < ApplicationController
     @movie.downvote_from current_user
     redirect_to root_path
   end
+
+
 
   private
   def set_movie

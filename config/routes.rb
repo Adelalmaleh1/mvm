@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   get 'welcome/contact'
   
     resources :movies do
-    resources :reviews, except: [:index, :show]
+      collection do
+        get 'search'
+      end
+      resources :reviews, except: [:index, :show]
   	member do
   		put "like" => "movies#upvote"
   		put "dislike" => "movies#downvote"

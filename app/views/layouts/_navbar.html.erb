@@ -24,14 +24,12 @@
           </li>
         <%end%>
       </ul>
-      <%= form_tag movies_path, class: "navbar-form navbar-left", role: "search", method: :get do |f| %>
-      <div class= "form-group">
-        <%= text_field_tag :q, params[:q], class: "form-control" %>
-      </div>
-      <%= button_tag "search", class: "btn btn-default", name: nil %>
-      <%end %>
-        
- 
+        <%= form_tag search_movies_path, method: :get, class: "navbar-form navbar-left", role: "search" do %>
+        <p>
+          <%= text_field_tag :search, params[:search], class: "form-control" %>
+          <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+        </p>
+        <% end %>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

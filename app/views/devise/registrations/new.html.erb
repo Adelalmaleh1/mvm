@@ -1,56 +1,89 @@
-<div class="container">
-    
-<h2>Register</h2>
+<h2 >Register:</h2>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-horizontal'}) do |f| %>
+<%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-<div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+<div class="form-group">
+    <%= f.label :first_name , class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.text_field :first_name, autofocus: true, class: "form-control",autofocus: true %>
+    </div>
 </div>
 
-<div class="field">
-  <%= f.label :last_name %><br />
-  <%= f.text_field :last_name, autofocus: true %>
+<div class="form-group">
+    <%= f.label :last_name , class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.text_field :last_name, autofocus: true, class: "form-control",autofocus: true %>
+    </div>
 </div>
 
-  <div class="field">
-    <%= f.label :DOB %><br />
-    <%= f.date_field :DOB, autofocus: true %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_area :address, autofocus: true %>
-  </div>
+<div class="form-group">
+    <%= f.label :DOB  , class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.date_field :DOB, autofocus: true, class: "form-control",autofocus: true %>
+    </div>
+</div>
 
-   
-  <div class="field">
-    <%= f.radio_button :gender, 'male' %><%= f.label :gender_male, "Male"%>
-    <%= f.radio_button :gender, 'female' %><%= f.label :gender_female, "female"%>
-  </div>
+<div class="form-group">
+    <%= f.label :address  , class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.text_area :address, autofocus: true, class: "form-control",autofocus: true %>
+    </div>
+</div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
+<div class="form-group">
+  <label class="control-label col-sm-2">Gender</label>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-4">
+          <label class="radio-inline" >
+            <%= f.radio_button :gender, 'male' %>
+            <input type="radio" id="maleRadio" value="Male">Male
+          </label>
+        </div>
+        <div class="col-sm-4">
+          <label class="radio-inline">
+            <%= f.radio_button :gender, 'female' %>
+            <input type="radio" id="femaleRadio" value="Female">Female
+          </label>
+        </div>
+      </div>
+    </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+<div class="form-group">
+    <%= f.label :email, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.email_field :email, class: "form-control" %>
+    </div>
+</div>
 
-  <div class="actions"><br />
-    <%= f.submit "Sign up" %>
-  </div>
+<div class="form-group">
+    <%= f.label :password, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
+</div>
+
+<div class="form-group">
+    <%= f.label :password_confirmation, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+        <%= f.submit "Sign up", class: "btn btn-primary" %>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+        <%= render "devise/shared/links" %>
+    </div>
+</div>
 <% end %>
 
-<%= render "devise/shared/links" %> 
+   
+
