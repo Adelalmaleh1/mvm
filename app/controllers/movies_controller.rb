@@ -3,16 +3,14 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def search
-    if params[:search].present?
-      @movies= Movie.search(params[:search])
-    else
-      @movies = Movie.all
-    end
+    @movies = Movie.search(params[:search])
+    flash[:notice] = "opps, we couldn't fine movie with #{params[:search]}" if @movies.empty?
   end
 
   def index
       @movies = Movie.order(:cached_votes_score => :desc)
-      @movies = @movies.paginate(:page => 1, :per_page => 10)
+      @movies = @movies.paginate(:page => params[:page], :per_page => 10)
+
   end
 
   def show
@@ -20,7 +18,6 @@ class MoviesController < ApplicationController
   end
 
   def new
-    @movie = current_user.movies.build
     @movie = Movie.new 
     @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
@@ -66,12 +63,10 @@ class MoviesController < ApplicationController
 
   def upvote
     @movie.upvote_from current_user
-    redirect_to root_path
   end
 
   def downvote
     @movie.downvote_from current_user
-    redirect_to root_path
   end
 
 

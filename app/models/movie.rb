@@ -7,10 +7,18 @@ class Movie < ActiveRecord::Base
 	belongs_to :category
   has_many :reviews
 	acts_as_votable
-	searchkick
+	
 
 	has_attached_file :image, styles: { medium: "400x600#" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
-  
+	
+	scope :by_user, lambda { |user| where(:user_id => user.id)  }
+
+	scope :high_rate, -> { where('rating >= ?', 5) }
+	scope :action, -> { where(category_id: Category.find_by_name("Action").id) }
+
+	
+	scope :title, -> (title) { where title: title }
+	scope :search, -> (title) { where("title like ?", "#{title}%")}
 end
 

@@ -8,6 +8,9 @@
 	font-style: oblique;
 }
 
+
+/*----------- footer-----------*/
+
 .footer{
 	margin-top: 45px;
 	padding-top: 5px;
@@ -32,6 +35,8 @@ footer ul li {
 	float: left;
 	margin-left: 15px;
 }
+
+/*----------- sign in buttum-----------*/
 
 .like:hover { 
 	text-decoration: none;
@@ -59,4 +64,8 @@ footer ul li {
 
 .btn:focus, .btn:active:focus, .btn.active:focus {
     outline: 0 none;
+}
+
+.navbar-nav{
+	color: #0099cc;
 }

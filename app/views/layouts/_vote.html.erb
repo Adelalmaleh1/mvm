@@ -1,13 +1,15 @@
-<%= link_to like_movie_path(movie), class: "like", method: :put do %>
-  <button type= "button" class = "btn btn-info" aria-label= "Left Align">
-    <span class= "glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden= "true"></span>
-    <span class= "badge"><%= movie.get_upvotes.size%></span>
-  </button>
- <%end%>
+<% if user_signed_in? %>
+	<%= link_to like_movie_path(movie), class: "like", method: :put, remote: true do %>
+	  <button type= "button" class = "btn btn-info" aria-label= "Left Align">
+	    <span class= "glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden= "true"></span>
+	    <span class= "badge" id='badge-vote-<%=movie.id%>'><%= movie.get_upvotes.size%></span>
+	  </button>
+	 <%end%>
 
-<%= link_to dislike_movie_path(movie), class: "like", method: :put do %>
-<button type= "button" class = "btn btn-info" aria-label= "Left Align">
-  <span class= "glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden= "true"></span>
-  <span class= "badge"><%= movie.get_downvotes.size%></span>
-</button>
+	<%= link_to dislike_movie_path(movie), class: "like", method: :put, remote: true do %>
+	<button type= "button" class = "btn btn-info" aria-label= "Left Align">
+	  <span class= "glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden= "true"></span>
+	  <span class= "badge" id='badge-vote-<%=movie.id%>'><%= movie.get_downvotes.size%></span>
+	</button>
+	<%end%>
 <%end%>
