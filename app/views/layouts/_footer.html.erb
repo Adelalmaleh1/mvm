@@ -11,9 +11,11 @@
 				<li><%= link_to "Terms", '#' %></li>
 				<li><%= link_to "Privacy", '#' %></li>
 				<li><%= link_to "Support", '#' %></li>
-				<li><% Category.all.each do |category|%>
-        <li><%= link_to "#{category.name}", category_path(category) %></li>
-        <%end %>
+				<% if user_signed_in? %>
+					<li><% Category.all.each do |category|%>
+        	<li><%= link_to "#{category.name}", category_path(category) %></li>
+        	<%end %>
+       	<%end%>
 			</ul>
 		</nav>
 	</footer>

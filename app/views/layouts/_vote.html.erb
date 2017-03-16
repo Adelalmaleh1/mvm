@@ -9,7 +9,7 @@
 	<%= link_to dislike_movie_path(movie), class: "like", method: :put, remote: true do %>
 	<button type= "button" class = "btn btn-info" aria-label= "Left Align">
 	  <span class= "glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden= "true"></span>
-	  <span class= "badge" id='badge-vote-<%=movie.id%>'><%= movie.get_downvotes.size%></span>
+	  <span class= "badge" id='badge-disvote-<%=movie.id%>'><%= movie.get_downvotes.size%></span>
 	</button>
 	<%end%>
 <%end%>

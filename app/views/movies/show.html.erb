@@ -66,12 +66,13 @@
   </div>
 </div>
 <ul>
-  <% if user_signed_in? %>
-    <% if @movie.user_id == current_user.id %>
-      <%= link_to 'Edit', edit_movie_path(@movie) %> |
-      <%= link_to 'Back', movies_path %>
+    <% if user_signed_in? %>
+      <% if @movie.user_id == current_user.id %>
+        <%= link_to 'Edit', edit_movie_path(@movie) %> |
+        <%= link_to 'Back', movies_path %>
+        <%else%>
+      <%end%>
     <%end%>
-  <%end%>
 </ul>
 
 
