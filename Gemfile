@@ -28,7 +28,7 @@ gem 'devise'
 gem "paperclip", "~> 5.0.0"
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'will_paginate', '~> 3.1'
-gem 'puma'
+gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -38,10 +38,22 @@ end
 group :development do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+   gem 'web-console', '>= 3.3.0'
+  gem 'listen', '~> 3.0.5'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'capistrano', '~> 3.6'
+  gem 'capistrano-rails', '~> 1.3'  
+  gem 'capistrano-bundler', '~> 1.2'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-passenger'
+
+
 
 end
 
